@@ -1,50 +1,20 @@
-const book = document.getElementById("book");
+const pageFlip = new St.PageFlip(document.getElementById("book"), {
+    width: 564,
+    height: 900,
 
-function getBookSize() {
-    const isMobile = window.innerWidth <= 600;
+    size: "stretch",
 
-    if (isMobile) {
-        const maxWidth = window.innerWidth * 0.92;
-        const maxHeight = window.innerHeight * 0.90;
+    minWidth: 280,
+    maxWidth: 564,
 
-        const ratio = 564 / 900;
+    minHeight: 450,
+    maxHeight: 900,
 
-        let height = maxHeight;
-        let width = height * ratio;
+    showCover: true,
+    usePortrait: true,
 
-        if (width > maxWidth) {
-            width = maxWidth;
-            height = width / ratio;
-        }
-
-        return {
-            width: Math.round(width),
-            height: Math.round(height)
-        };
-    }
-
-    return {
-        width: 564,
-        height: 900
-    };
-}
-
-let size = getBookSize();
-
-const pageFlip = new St.PageFlip(book, {
-    width: size.width,
-    height: size.height,
-    size: "fixed",
-    showCover: true
+    autoSize: true,
+    mobileScrollSupport: true
 });
 
 pageFlip.loadFromHTML(document.querySelectorAll(".page"));
-
-window.addEventListener("resize", () => {
-    const newSize = getBookSize();
-
-    pageFlip.updateFromImages?.();
-
-    book.style.width = `${newSize.width * 2}px`;
-    book.style.height = `${newSize.height}px`;
-});
