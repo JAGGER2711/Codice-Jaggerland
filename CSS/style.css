@@ -8,6 +8,8 @@ body {
 #book {
     width: 1128px;
     height: 900px;
+    max-width: 100vw;
+    max-height: 100vh;
 }
 
 .page {
